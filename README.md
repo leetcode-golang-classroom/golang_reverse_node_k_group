@@ -130,7 +130,7 @@ func ReverseList(arr *[]*ListNode, start int, end int, step int) {
  *     Next *ListNode
  * }
  */
-func reverseKGroup(head *ListNode, k int) *ListNode {
+func reverseKGroupV2(head *ListNode, k int) *ListNode {
 	nLen := 0
 	cur := head
 	for cur != nil {
@@ -167,12 +167,11 @@ func ReverseKNode(startNode *ListNode, startCount int, step int) (*ListNode, *Li
 	count := startCount
 	max := startCount + step
 	for count < max {
-		if tail == nil {
-			tail = cur
-		}
 		if prev == nil {
-			prev = cur
+			tail = cur
+			prev = tail
 			cur = cur.Next
+			prev.Next = nil
 		} else {
 			temp := prev
 			prev = cur
@@ -181,16 +180,7 @@ func ReverseKNode(startNode *ListNode, startCount int, step int) (*ListNode, *Li
 		}
 		count++
 	}
-	tail.Next = nil
 	return cur, tail, prev, count
-}
-func Transverse(head *ListNode) {
-	cur := head
-	for cur != nil {
-		log.Printf("%v->", cur.Val)
-		cur = cur.Next
-	}
-	log.Println()
 }
 ```
 
